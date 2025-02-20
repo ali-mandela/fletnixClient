@@ -1,0 +1,98 @@
+<div class="px-6 flex py-8 mx-auto container flex-col min-h-screen">
+  <!-- Welcome Message -->
+  <h2 class="text-2xl my-8 text-white text-left">Welcome {{ username }}</h2>
+
+  <!-- Movies Grid -->
+  <div class="flex-grow">
+      <div *ngIf="movies$ | async as movies; else loading">
+          <div
+              *ngIf="movies.length > 0; else noResults"
+              class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+              <div *ngFor="let movie of movies"
+    class="bg-gray-900 border border-gray-700 p-4 rounded-lg shadow-lg flex flex-col h-full">
+    
+    <!-- Movie Details (Ensuring Equal Height) -->
+    <div class="flex-grow">
+        <h3 class="text-lg font-bold text-white mt-2 truncate">{{ movie.title }}</h3>
+
+        <!-- Show Cast only if available -->
+        <p *ngIf="movie.cast" class="text-xs text-gray-400 mt-2 truncate">
+            <span class="font-semibold text-gray-300">Cast:</span> {{ movie.cast }}
+        </p>
+
+        <!-- Description (Fixed Height) -->
+        <p class="text-sm text-gray-300 mt-2 line-clamp-3 min-h-[60px]">
+            {{ movie.description }}
+        </p>
+        <!-- Categories (Tags) -->
+    <div class="flex flex-wrap gap-2 my-2">
+      <span *ngFor="let category of movie.listed_in.split(', ')"
+          class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded-full">
+          # {{ category }}
+      </span>
+  </div>
+    </div>
+
+    
+
+    <!-- Buttons (Always at Bottom) -->
+    <div class="mt-auto flex flex-col gap-2">
+        <button 
+            class="w-full  text-red-600 text-center bg-white border-2 border-white font-semibold py-2 rounded-full transition-all hover:bg-transparent   hover:text-white">
+            {{ movie.type }}
+        </button>
+        <button (click)="viewMovie(movie._id)"
+            class="w-full bg-red-700 cursor-pointer text-white text-center  font-semibold py-2 rounded-full transition-all hover:bg-red-600 hover:text-white">
+            More
+        </button>
+    </div>
+</div>
+
+          </div>
+      </div>
+  </div>
+
+  <!-- Loading Placeholder -->
+  <ng-template #loading>
+      <p class="text-gray-400 text-center">Loading movies...</p>
+  </ng-template>
+
+  <!-- No Results -->
+  <ng-template #noResults>
+      <p class="text-gray-400 text-center">No movies found.</p>
+  </ng-template>
+
+  <!-- Pagination (Always at Bottom Center) -->
+  <div class="flex my-12 pb-4">
+      <ng-container *ngIf="(movies$ | async)?.length">
+          <div class="flex space-x-2">
+              <button
+                  [disabled]="(currentPage$ | async) === 1"
+                  (click)="prevPage()"
+                  class="w-28 h-8 border rounded-full bg-gray-700 text-white hover:bg-red-500 disabled:opacity-50">
+                  Previous
+              </button>
+
+              <ng-container *ngIf="pageNumbers$ | async as pages">
+                  <button
+                      *ngFor="let page of pages"
+                      (click)="fetchPage(page)"
+                      class=" w-8 h-8 hidden md:flex  justify-center items-center text-sm border rounded-full"
+                      [ngClass]="{
+                        'bg-red-500 text-white': (currentPage$ | async) === page,
+                        'bg-gray-700 text-white hover:bg-gray-600': (currentPage$ | async) !== page
+                      }">
+                      {{ page }}
+                  </button>
+              </ng-container>
+
+              <button
+                  [disabled]="(currentPage$ | async) === (totalPages$ | async)"
+                  (click)="nextPage()"
+                  class="w-28 h-8 rounded-full border text-sm  bg-gray-700 text-white hover:bg-red-500 disabled:opacity-50">
+                  Next
+              </button>
+          </div>
+      </ng-container>
+  </div>
+</div>

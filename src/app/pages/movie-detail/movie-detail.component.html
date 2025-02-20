@@ -1,0 +1,37 @@
+<div class="container mx-auto px-6 py-8 min-h-screen text-white bg-gray-900">
+  <button (click)="goBack()" class="mb-6 rounded-full border-2 border-gray-200 hover:bg-gray-700 text-white px-4 py-2 flex items-center gap-2">
+    ← Back to Movies
+  </button>
+
+  <div *ngIf="movie; else loading" class="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <h2 class="text-4xl font-bold text-green-400">{{ movie.title }}</h2>
+    <p class="text-gray-400 text-sm mt-2">Type: <span class="text-gray-200">{{ movie.type }}</span></p>
+    <p class="text-gray-400 text-sm mt-2">Rating: <span class="text-gray-200">{{ movie.rating }}</span></p>
+    <p class="text-gray-400 text-sm mt-2">Release Year: <span class="text-gray-200">{{ movie.release_year }}</span></p>
+    <p class="text-gray-400 text-sm mt-2">Duration: <span class="text-gray-200">{{ movie.duration }}</span></p>
+    
+    <div class="mt-4">
+      <h3 class="text-lg font-semibold text-green-300">Cast</h3>
+      <p class="text-gray-300 leading-relaxed">{{ movie.cast }}</p>
+    </div>
+
+    <div class="mt-4">
+      <h3 class="text-lg font-semibold text-green-300">Description</h3>
+      <p class="text-gray-300 leading-relaxed">{{ movie.description }}</p>
+    </div>
+
+    <div class="mt-4">
+      <h3 class="text-lg font-semibold text-green-300">Genres</h3>
+      <div class="flex flex-wrap gap-2 mt-2">
+        <span *ngFor="let genre of movie.listed_in.split(', ')" 
+              class="bg-gray-600 hover:bg-red-700 px-3 py-1 rounded-full text-xs text-white">
+          #{{ genre }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <p class="text-gray-400 text-center text-lg">Loading movie details...</p>
+  </ng-template>
+</div>

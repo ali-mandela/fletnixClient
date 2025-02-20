@@ -1,0 +1,59 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-900 px-6">
+  <div class="w-full max-w-md bg-white bg-opacity-90 backdrop-blur-md rounded-2xl shadow-2xl p-8">
+    <!-- Logo -->
+    <div class="flex flex-col items-center">
+      <h1 class="text-5xl font-extrabold text-red-600 drop-shadow-lg animate-pulse">FletNix</h1>
+      <p class="mt-2 text-lg text-gray-700 text-center">Your favorite movies, anytime, anywhere.</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
+      <p class="text-sm font-semibold">{{ errorMessage }}</p>
+    </div>
+
+    <!-- Sign In Form -->
+    <div class="mt-6">
+      <h2 class="text-3xl font-bold text-center text-gray-800">Welcome Back</h2>
+      <p class="text-center text-gray-600 mt-2">Sign in to continue</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6 mt-6">
+        <!-- Email Input -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input id="email" type="email" formControlName="email"
+                 class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-red-600 focus:border-red-600 transition duration-300" 
+                 placeholder="Enter your email">
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+               class="text-red-500 text-xs mt-1">
+            Please enter a valid email address.
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input id="password" type="password" formControlName="password"
+                 class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-red-600 focus:border-red-600 transition duration-300" 
+                 placeholder="Enter your password">
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+               class="text-red-500 text-xs mt-1">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button type="submit" [disabled]="loginForm.invalid || loading"
+                  class="w-full py-3 text-white font-semibold bg-red-600 rounded-lg shadow-md hover:bg-red-500 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            {{ loading ? 'Logging in...' : 'Login' }}
+          </button>
+        </div>
+      </form>
+
+      <!-- Sign Up Link -->
+      <p class="text-center text-gray-600 mt-4 text-sm">
+        <a routerLink="/signup" class="text-red-600 hover:underline">Create an account</a>
+      </p>
+    </div>
+  </div>
+</div>
