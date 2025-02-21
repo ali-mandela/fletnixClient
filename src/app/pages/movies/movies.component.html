@@ -6,21 +6,21 @@
     <button 
       (click)="setSelectedType('')" 
       [ngClass]="{' border-red-500 text-white': selectedType === '', ' text-gray-300': selectedType !== ''}"
-      class="px-4 py-1 border-2 rounded-full transition-all  duration-300 hover:">
+      class="px-4 py-1 border-2 text-sm rounded-full transition-all  duration-300 hover:">
       All
     </button>
     
     <button 
       (click)="setSelectedType('Movie')" 
       [ngClass]="{' border-red-500 text-white': selectedType === 'Movie', ' text-gray-300': selectedType !== 'Movie'}"
-      class="px-4 py-1 border-2 rounded-full transition-all  duration-300 hover:">
+      class="px-4 py-1 border-2 text-sm rounded-full transition-all  duration-300 hover:">
       Movies
     </button>
     
     <button 
       (click)="setSelectedType('TV Show')" 
       [ngClass]="{' border-red-500 text-white': selectedType === 'TV Show', ' text-gray-300': selectedType !== 'TV Show'}"
-      class="px-4 py-1 border-2 rounded-full transition-all  duration-300 hover:">
+      class="px-4 py-1 border-2 text-sm rounded-full transition-all  duration-300 hover:">
       TV Shows
     </button>
   </div>
