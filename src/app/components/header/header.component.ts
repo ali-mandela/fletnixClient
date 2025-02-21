@@ -1,3 +1,4 @@
+// This file defines the header component, which includes a search bar, navigation menu, and logout functionality.
 import { Component } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';  
 import { MovieService } from '../../services/movie.service';
@@ -8,13 +9,12 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'], 
-  imports: [ NgIf, FormsModule, RouterModule] // Import only what is needed
+  imports: [ NgIf, FormsModule, RouterModule] 
 })
 export class HeaderComponent {
   searchQuery: string = '';
   selectedType: string = '';
-  isMenuOpen: boolean = false; // Add missing property
-  isSearchOpen: boolean = false; // Add missing search toggle property
+  isMenuOpen: boolean = false;   
 
   constructor(private movieService: MovieService, private router: Router) {}
 
@@ -34,16 +34,11 @@ export class HeaderComponent {
   }
 
   logout() {
-    // Clear user token and redirect to login page
-    localStorage.clear();
-    this.router.navigate(['/signin']); // Redirect to login page
+       localStorage.clear();
+      this.router.navigate(['/signin']);  
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen; // Toggle the menu state
-  }
-
-  toggleSearch() {
-    this.isSearchOpen = !this.isSearchOpen; // Toggle the search bar state
-  }
+  this.isMenuOpen = !this.isMenuOpen; 
+  } 
 }

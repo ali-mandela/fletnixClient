@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {  NgForOf, NgIf } from '@angular/common';
+import {  DatePipe, NgForOf, NgIf } from '@angular/common';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-movie-detail',
-  imports:[NgIf,NgForOf],
+  imports:[NgIf,NgForOf,DatePipe],
   templateUrl: './movie-detail.component.html',
   styleUrls: ['./movie-detail.component.css']
 })

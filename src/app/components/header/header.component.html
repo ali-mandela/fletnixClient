@@ -1,36 +1,31 @@
-<header class="bg-black text-white py-4">
-  <div class="container mx-auto flex justify-between items-center px-6">
-    <!-- Logo -->
+<header class="bg-black text-white pt-4 md:py-4">
+  <div class="container mx-auto flex justify-between items-center px-6"> 
+    <!-- text logo -->
     <h1 [routerLink]="['/movies']" class="text-3xl cursor-pointer md:text-4xl font-extrabold text-red-600 drop-shadow-lg">
       FletNix
     </h1>
-
-    <!-- Mobile Icons (Search & Logout) -->
-    <div class="md:hidden flex items-center space-x-4">
-      <button (click)="toggleSearch()" class="text-red-500  focus:outline-none">
-        <i class="fa-solid fa-magnifying-glass items-center text-2xl"></i>  
-      </button>
-      <button (click)="logout()" class="text-red-500 focus:outline-none">
-        <i class="fa-solid fa-right-from-bracket text-2xl"></i> <!-- Logout Icon -->
+    <!-- Logout button -->
+    <div class="md:hidden flex items-center space-x-4"> 
+      <button (click)="logout()" class="text-red-500 flex justify-center items-center gap-2 focus:outline-none">
+          Logout
       </button> 
-    </div>
-
-    <!-- Desktop Navigation -->
+    </div> 
+    <!-- web Navigation -->
     <div class="hidden md:flex items-center space-x-4">
       <!-- Search Bar -->
       <div class="flex items-center space-x-2 text-white bg-gray-900 rounded-full px-4 py-2 shadow-lg">
-        <select [(ngModel)]="selectedType" (change)="searchMovies()" 
-          class="bg-gray-800 text-white border border-gray-700 rounded-md px-3 py-1">
-          <option selected value="" class="text-gray-300">Types 🔻</option>
-          <option value="Movie" class="text-black">Movies</option>
-          <option value="TV Show" class="text-black">TV Shows</option>
+        <select [(ngModel)]="selectedType" (change)="searchMovies()" >
+          <option selected value="" class=" text-gray-300">Types 🔻</option>
+          <option value="Movie" class=" text-black">Movies 🔻</option>
+          <option value="TV Show" class=" text-black">TV Shows 🔻</option>
         </select> 
+        <p class="border-l-2  border-white text-gray-900 ">.</p>
         <input 
           type="text" 
           [(ngModel)]="searchQuery"
           (keyup.enter)="searchMovies()"
           placeholder="Search by title or cast..." 
-          class="bg-transparent border-l-2 border-white border-r-2 text-white placeholder-gray-400 focus:outline-none px-2 w-40 sm:w-60"
+          class="bg-transparent border-white border-r-2 text-white placeholder-gray-400 focus:outline-none px-2 w-40 sm:w-60"
         /> 
         <button (click)="searchMovies()" class="text-red-500 flex items-center justify-center cursor-pointer hover:text-white">
           <i class="fa-solid fa-magnifying-glass text-2xl"></i> 
@@ -48,13 +43,8 @@
   </div>
 
   <!-- Mobile Search Bar (Hidden Initially) -->
-  <div *ngIf="isSearchOpen" class="md:hidden bg-gray-900 text-white p-4 mt-2">
+  <div class="md:hidden bg-gray-900 text-white p-4 mt-2">
     <div class="flex items-center space-x-2 bg-gray-800 rounded-full px-4 py-2">
-      <select [(ngModel)]="selectedType" (change)="searchMovies()" class="bg-gray-700 text-white border border-gray-600 rounded-md px-3 py-1">
-        <option selected value="" class="text-gray-300">Type <i class="fa-solid fa-chevron-down"></i></option>
-        <option value="Movie" class="text-white bg-gray-700">Movies</option>
-        <option value="TV Show" class="text-white bg-gray-700">TV Shows</option>
-      </select>
       <input 
         type="text" 
         [(ngModel)]="searchQuery"
@@ -63,18 +53,8 @@
         class="bg-transparent text-white  placeholder-gray-400 focus:outline-none px-2 w-full"
       />
       <button (click)="searchMovies()" class="text-red-500 cursor-pointer hover:text-white">
-        <i class="fa-solid fa-magnifying-glass text-2xl"></i> <!-- Search Icon -->
+        <i class="fa-solid fa-magnifying-glass text-2xl"></i>  
       </button>
     </div>
-  </div>
-
-  <!-- Mobile Menu (Hidden Initially) -->
-  <div *ngIf="isMenuOpen" class="md:hidden bg-gray-900 container text-white p-4 mt-2 space-y-4">
-    <button 
-      (click)="logout()" 
-      class="w-full bg-red-600 text-white font-semibold py-2 rounded-full border-2 border-red-600 transition-all duration-300 
-            hover:bg-black hover:border-white hover:text-white"> 
-      <i class="fa-solid fa-right-from-bracket text-3xl"></i> Logout
-    </button>
-  </div>
+  </div> 
 </header>

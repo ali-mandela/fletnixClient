@@ -1,13 +1,37 @@
-<div class="px-6 flex py-8 mx-auto container flex-col min-h-screen">
-  <!-- Welcome Message -->
-  <h2 class="text-2xl my-8 text-white text-left">Welcome {{ username }}</h2>
+<!-- This file displays a list of movies and TV shows, allows filtering by type, and includes pagination. -->
+<div class="px-6 flex pB-8 pt-2 mx-auto container flex-col min-h-screen">
+   <h2 class="text-2xl my-8 text-white text-left">Welcome, {{ username }}.</h2>
+   <!-- Filter by Type for Mobile -->
+<div class="flex overflow-x-hidden space-x-2 mb-4 bg-gray-900 md:hidden p-2 rounded-full shadow-lg">
+    <button 
+      (click)="setSelectedType('')" 
+      [ngClass]="{' border-red-500 text-white': selectedType === '', ' text-gray-300': selectedType !== ''}"
+      class="px-4 py-1 border-2 rounded-full transition-all  duration-300 hover:">
+      All
+    </button>
+    
+    <button 
+      (click)="setSelectedType('Movie')" 
+      [ngClass]="{' border-red-500 text-white': selectedType === 'Movie', ' text-gray-300': selectedType !== 'Movie'}"
+      class="px-4 py-1 border-2 rounded-full transition-all  duration-300 hover:">
+      Movies
+    </button>
+    
+    <button 
+      (click)="setSelectedType('TV Show')" 
+      [ngClass]="{' border-red-500 text-white': selectedType === 'TV Show', ' text-gray-300': selectedType !== 'TV Show'}"
+      class="px-4 py-1 border-2 rounded-full transition-all  duration-300 hover:">
+      TV Shows
+    </button>
+  </div>
+  
 
-  <!-- Movies Grid -->
+  <!-- Movies Grid 1 at mobile -->
   <div class="flex-grow">
       <div *ngIf="movies$ | async as movies; else loading">
           <div
               *ngIf="movies.length > 0; else noResults"
-              class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+              class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
               <div *ngFor="let movie of movies"
     class="bg-gray-900 border border-gray-700 p-4 rounded-lg shadow-lg flex flex-col h-full">
     
@@ -63,21 +87,21 @@
   </ng-template>
 
   <!-- Pagination (Always at Bottom Center) -->
-  <div class="flex my-12 pb-4">
+  <div class="flex justify-center my-12 pb-4">
       <ng-container *ngIf="(movies$ | async)?.length">
           <div class="flex space-x-2">
               <button
                   [disabled]="(currentPage$ | async) === 1"
                   (click)="prevPage()"
-                  class="w-28 h-8 border rounded-full bg-gray-700 text-white hover:bg-red-500 disabled:opacity-50">
-                  Previous
+                  class="w-8 h-8 border rounded-full bg-gray-700 text-white hover:bg-red-500 disabled:opacity-50">
+                  <i class="fa-solid fa-chevron-left"></i>
               </button>
 
               <ng-container *ngIf="pageNumbers$ | async as pages">
                   <button
                       *ngFor="let page of pages"
                       (click)="fetchPage(page)"
-                      class=" w-8 h-8 hidden md:flex  justify-center items-center text-sm border rounded-full"
+                      class=" w-8 h-8 flex  justify-center items-center text-sm border rounded-full"
                       [ngClass]="{
                         'bg-red-500 text-white': (currentPage$ | async) === page,
                         'bg-gray-700 text-white hover:bg-gray-600': (currentPage$ | async) !== page
@@ -89,8 +113,8 @@
               <button
                   [disabled]="(currentPage$ | async) === (totalPages$ | async)"
                   (click)="nextPage()"
-                  class="w-28 h-8 rounded-full border text-sm  bg-gray-700 text-white hover:bg-red-500 disabled:opacity-50">
-                  Next
+                  class="w-8 h-8 rounded-full border text-sm  bg-gray-700 text-white hover:bg-red-500 disabled:opacity-50">
+                  <i class="fa-solid fa-chevron-right"></i>
               </button>
           </div>
       </ng-container>

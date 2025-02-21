@@ -6,8 +6,12 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+/*
+This is a service file, this here act as a global store where the data is 
+fetched from server and other components such as movies are rendering that
+or components like header are updating this.
+*/
 export class MovieService {
-  // private apiUrl = 'https://fletnixbackend-hgqr.onrender.com/api/movies/search';
   private baseAPIUrl = `${environment.baseApi}/movies/search`;
   
 

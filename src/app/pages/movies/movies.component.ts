@@ -4,6 +4,11 @@ import { Observable, combineLatest, map } from 'rxjs';
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 
+/* 
+This component creates a variables and methods for movies search component , with help of which movies are fetched and rendered 
+in the component along with the pagination method.
+*/
+
 @Component({
   selector: 'app-movies',
   standalone: true,
@@ -18,8 +23,9 @@ export class MoviesComponent implements OnInit {
   pageNumbers$: Observable<number[]>;
   userData: string | null = localStorage.getItem('user');
   parsedUser: any = this.userData ? JSON.parse(this.userData) : null;
-  username: string = this.parsedUser?.name || "Guest User";
-  router = inject(Router)
+  username: string = this.parsedUser?.name || " User";
+  router = inject(Router);
+  selectedType: string = '';
  
 
   constructor(private movieService: MovieService) {
@@ -40,8 +46,18 @@ export class MoviesComponent implements OnInit {
     this.movieService.fetchPage(page);
   }
   viewMovie(showId: string) {
-    this.router.navigate(['/movies', showId]); // Navigates to /movies/:id
-}
+    this.router.navigate(['/movies', showId]); 
+  }
+  searchMovies() {
+    this.movieService.searchMovies('', this.selectedType);
+    if (this.router.url !== '/movies') {
+      this.router.navigate(['/movies']);
+    }
+  }
+  setSelectedType(type: string): void {
+    this.selectedType = type;
+    this.searchMovies();
+  }
 
 
   prevPage(): void {
