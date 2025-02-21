@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "e2e":"npx playwright test",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -28,7 +29,9 @@
     "@angular-devkit/build-angular": "^19.1.7",
     "@angular/cli": "^19.1.7",
     "@angular/compiler-cli": "^19.1.0",
+    "@playwright/test": "^1.50.1",
     "@types/jasmine": "~5.1.0",
+    "@types/node": "^22.13.4",
     "jasmine-core": "~5.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

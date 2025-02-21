@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'], 
-  imports: [ NgIf, FormsModule, RouterModule] 
+  imports: [  FormsModule, RouterModule] 
 })
 export class HeaderComponent {
   searchQuery: string = '';

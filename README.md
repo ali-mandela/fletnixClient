@@ -33,4 +33,12 @@ This will compile your project and store the build artifacts in the `dist/` dire
 
 ## Test
 
+TO test the project END to END
+First start the server locally
+chnage the user email and password
+run the command
+```bash
+npm run e2e
+```
+
 

@@ -22,6 +22,7 @@
         <p class="border-l-2  border-white text-gray-900 ">.</p>
         <input 
           type="text" 
+          id="searchQuery"
           [(ngModel)]="searchQuery"
           (keyup.enter)="searchMovies()"
           placeholder="Search by title or cast..." 
@@ -35,7 +36,7 @@
 
     <!-- Desktop Logout Button -->
     <button 
-      (click)="logout()" 
+      (click)="logout()" data-testid="logout-button"
       class="hidden md:block bg-red-600 text-white font-semibold px-5 py-2 rounded-full border-2 border-red-600 transition-all duration-300 
             hover:bg-black hover:border-white hover:text-white">
       <i class="fa-solid fa-right-from-bracket text-xl align-middle"></i> Logout
